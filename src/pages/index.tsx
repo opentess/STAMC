@@ -55,41 +55,46 @@ export default function Home() {
               <table className=" w-full flex flex-col gap-2 my-6">
                 <thead>
                   <tr>
-                    <th>Title</th>
-                    <th>Public</th>
-                    <th>Operations</th>
+                    <th key="title">Title</th>
+                    <th key="public">Public</th>
+                    <th key="operations">Operations</th>
                   </tr>
                 </thead>
-                {playlists &&
-                  playlists.map((playlist) => {
-                    console.log(playlist);
-                    const { name } = playlist;
-                    return (
-                      <tr className=" py-2 flex justify-between items-center p-4 rounded-sm hover:shadow-md hover:ring-1 hover:ring-neutral-300 even:bg-emerald-500/10">
-                        <td>
-                          <h3 className="text-sm font-semibold">{name}</h3>
-                        </td>
-                        <td>
-                          <p className="text-xs rounded-sm py-[2px] font-extralight px-1 ring-1 ring-emerald-500/70 bg-emerald-500">
-                            {playlist["public"] ? "Public" : "Not Public"}
-                          </p>
-                        </td>
-                        <td>
-                          <div className="flex gap-2">
-                            <div className="ring-1 rounded-sm  h-6 ring-neutral-400 flex items-center justify-center cursor-pointer  hover:shadow px-2 text-neutral-200 bg-red-600/90 font-light ">
-                              <p className="text-xs">Transfer</p>
+                <tbody>
+                  {playlists &&
+                    playlists.map((playlist) => {
+                      console.log(playlist);
+                      const { name, id } = playlist;
+                      return (
+                        <tr
+                          key={id}
+                          className=" py-2 flex justify-between items-center p-4 rounded-sm hover:shadow-md hover:ring-1 hover:ring-neutral-300 even:bg-emerald-500/10"
+                        >
+                          <td>
+                            <h3 className="text-sm font-semibold">{name}</h3>
+                          </td>
+                          <td>
+                            <p className="text-xs rounded-sm py-[2px] font-extralight px-1 ring-1 ring-emerald-500/70 bg-emerald-500">
+                              {playlist["public"] ? "Public" : "Not Public"}
+                            </p>
+                          </td>
+                          <td>
+                            <div className="flex gap-2">
+                              <div className="ring-1 rounded-sm  h-6 ring-neutral-400 flex items-center justify-center cursor-pointer  hover:shadow px-2 text-neutral-200 bg-red-600/90 font-light ">
+                                <p className="text-xs">Transfer</p>
+                              </div>
+                              <div className="ring-1 rounded-sm w-6 h-6 ring-neutral-400 flex items-center justify-center cursor-pointer hover:bg-emerald-500/70  hover:shadow ">
+                                <ArrowTopRightOnSquareIcon className="w-4 h-4" />
+                              </div>
+                              <div className="ring-1 rounded-sm w-6 h-6 ring-neutral-400 flex items-center justify-center cursor-pointer hover:bg-red-500/70  hover:shadow ">
+                                <TrashIcon className="w-4 h-4" />
+                              </div>
                             </div>
-                            <div className="ring-1 rounded-sm w-6 h-6 ring-neutral-400 flex items-center justify-center cursor-pointer hover:bg-emerald-500/70  hover:shadow ">
-                              <ArrowTopRightOnSquareIcon className="w-4 h-4" />
-                            </div>
-                            <div className="ring-1 rounded-sm w-6 h-6 ring-neutral-400 flex items-center justify-center cursor-pointer hover:bg-red-500/70  hover:shadow ">
-                              <TrashIcon className="w-4 h-4" />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
               </table>
             </>
             <h3 className="text-sm font-semibold mt-auto">Stamc</h3>
@@ -100,15 +105,16 @@ export default function Home() {
               <main className="flex flex-col gap-2 mb-4 bg-emerald-500 p-5 max-w-sm w-full">
                 <h3 className="text-lg font-semibold">Top Tracks</h3>
                 <hr className="mb-4" />
-                {topTacks.map(({ name, artists, album }) => {
+                {topTacks.map(({ name, artists, album, id }) => {
                   const image = album?.images[0].url;
                   // console.log(playlist);
                   return (
-                    <div className="flex gap-2">
+                    <div key={id} className="flex gap-2">
                       <div className="w-12 h-12 bg-red-200">
                         <img
                           className="w-full h-full object-contain"
                           src={image}
+                          alt=""
                         />
                       </div>
                       <div className="flex flex-col">
